@@ -1,0 +1,15 @@
+invent = {
+ width = 30,
+ height = 14
+}
+
+keys = {
+ quit = "q",
+ items = "e",
+	moveKeys = {
+		w = {0, -1},
+		a = {-1, 0},
+		s = {0, 1},
+		d = {1, 0} 
+	}
+}
