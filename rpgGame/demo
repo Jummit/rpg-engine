@@ -1,0 +1,122 @@
+os.loadAPI("/rpgGame/api")
+term.setTextColor(colors.blue)
+api.newNPC()
+places = {
+	api.newPlace(
+		colors.blue,
+		"meadow1",
+		"The meadow of peace",
+		{
+			api.newPortal(3, 13, "meadow2", 48, 15)
+		}
+	),
+	api.newPlace(
+		colors.blue,
+		"meadow2",
+		"The second meadow",
+		{
+			api.newPortal(49, 15, "meadow1", 5, 13)
+		},
+		{
+			api.newNPC(
+				12,
+				13,
+				"Hans",
+				api.newDialog(
+					{
+						"Hey!",
+						"Do you know there is a secret portal",
+						"in the peace meadows?"
+					},
+					"I am no help anymore... Bye!",
+					function()
+						sleep(2)
+						table.insert(
+							places[1].portals,
+							api.newPortal(
+								44,
+								11,
+								"cave1",
+								20,
+								15
+							)
+						)
+						api.msg("Something has changed...", 2)
+					end,
+					function()
+						api.draw()
+						sleep(0.2)
+						api.msg("You: I think thats right.", 1)
+						places[2].
+						npcs[1].
+						dialog = api.newDialog(
+
+							{
+								"Do you want More than this awsome portal?",
+								"Do you want to go exploring?",
+								"Yes?",
+								"Then, this robe is the best thing you can have.",
+								"Try it out!"
+							},
+							"Try it out!",
+							function()
+								api.hero:getItem(api.newItem(
+									"The robe of exploring",
+									"Use it to travel far, far away",
+									1, 1, 1, 1,
+									colors.purple,
+									function() end,
+									function() end
+								))
+							end,
+							function() end
+						)
+					end
+				),
+				"y"
+			)
+		},
+		{
+			api.newItem(
+				"Rusty key",
+				"Its rusty, but not broken.",
+				16,
+				16,
+				200,
+				200,
+				colors.gray,
+				function()
+				end,
+				function()
+					api.msg("There is no door to open!", 1)
+				end
+			)
+		}
+	),
+	api.newPlace(
+		colors.gray,
+		"cave1",
+		"Dark caves",
+		{},
+		{},
+		{
+			api.newItem(
+				"Dynamite",
+				"Its called TNT",
+				3, 10, 3, 3,
+				colors.red,
+				function()
+					api.msg("Maybe i can find some fire to use it...", 1)
+				end,
+				function()
+				end
+			)
+		}
+	)
+}
+
+for k, v in pairs(places) do
+	api.addPlace(v)
+end
+
+api.main()
